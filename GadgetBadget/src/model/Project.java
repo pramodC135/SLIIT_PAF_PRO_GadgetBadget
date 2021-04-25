@@ -75,5 +75,46 @@ public class Project {
 	}
 	
 	
+	public String insertProject(String code, String name, String price, String desc, String by, String ctg){
+		 
+		 String output = ""; 
+		 
+		try{ 
+		 
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
+			
+			 if (con == null){
+				 return "Error while connecting to the database"; 
+			 }
+			 
+			 // create a prepared statement
+			 String query = " insert into projects (`projectID`,`projectCode`,`projectName`,`projectPrice`,`projectDesc`, `projectBy`, `projectCtg`)"
+					 + " values (?, ?, ?, ?, ?, ?, ?)"; 
+			 
+			 PreparedStatement preparedStmt = con.prepareStatement(query); 
+			 
+			 	// binding values
+			 	preparedStmt.setInt(1, 0); 
+			 	preparedStmt.setString(2, code); 
+			 	preparedStmt.setString(3, name); 
+			 	preparedStmt.setDouble(4, Double.parseDouble(price)); 
+			 	preparedStmt.setString(5, desc); 
+			 	preparedStmt.setString(6, by);
+			 	preparedStmt.setString(7, ctg); 
+			 
+			 	preparedStmt.execute(); 
+			 	con.close(); 
+			 
+			 	output = "Inserted successfully"; 
+		 	} 
+		
+			catch (Exception e){ 
+				output = "Error while inserting"; 
+				System.err.println(e.getMessage()); 
+			} 
+		
+			return output; 
+		}
 
 }
