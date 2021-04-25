@@ -28,7 +28,7 @@ public class Payment {
 				ResultSet rs = stmt.executeQuery(query);
 				// iterate through the rows in the result set
 				while (rs.next()) {
-					String paymentID = Integer.toString(rs.getInt("paymentID"));
+					//String paymentID = Integer.toString(rs.getInt("paymentID"));
 					String app_Code = rs.getString("app_Code");
 					String cardType = rs.getString("cardType");
 					String nameOnCard = rs.getString("nameOnCard");
