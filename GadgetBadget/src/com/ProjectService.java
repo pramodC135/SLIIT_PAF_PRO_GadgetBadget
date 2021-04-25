@@ -57,10 +57,26 @@ public class ProjectService {
 		 String projectName = projectObject.get("projectName").getAsString(); 
 		 String projectPrice = projectObject.get("projectPrice").getAsString(); 
 		 String projectDesc = projectObject.get("projectDesc").getAsString();
-		 String projectBuy = projectObject.get("projectBy").getAsString(); 
+		 String projectBy = projectObject.get("projectBy").getAsString(); 
 		 String projectCtg = projectObject.get("projectCtg").getAsString(); 
 		 
 		 String output = projectObj.updateProject(projectID, projectCode, projectName, projectPrice, projectDesc, projectBy, projectCtg); 
 		 return output; 
+	}
+	
+	
+	@DELETE
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_XML) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String deleteProject(String projectData) 
+	{ 
+		//Convert the input string to an XML document
+		 Document doc = Jsoup.parse(projectData, "", Parser.xmlParser()); 
+		 
+		//Read the value from the element <projectID>
+		 String projectID = doc.select("projectID").text(); 
+		 String output = projectObj.deleteProject(projectID); 
+		return output; 
 	}
 }
