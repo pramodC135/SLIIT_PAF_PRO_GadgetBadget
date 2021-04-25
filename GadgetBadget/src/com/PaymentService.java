@@ -60,10 +60,26 @@ public class PaymentService {
 				String phone = PaymentObj.get("phone").getAsString();
 				String expdate = PaymentObj.get("expdate").getAsString();
 				String amount = PaymentObj.get("amount").getAsString();
-				String status = PaymentObj.get("status").getAsString();
+				
+				String output = PayObj.updatePayment(paymentID, app_Code, cardType, nameOnCard, cardno, phone, expdate, amount);
+				return output;
+			}
+			
+			
 
-				String output = PayObj.updatePayment(paymentID, app_Code, cardType, nameOnCard, cardno, phone, expdate, amount,
-						status);
+			// method to delete the payment if it not valid
+			@DELETE
+			@Path("/")
+			@Consumes(MediaType.APPLICATION_XML)
+			@Produces(MediaType.TEXT_PLAIN)
+			public String deletePayment(String payData) {
+
+				//Convert the input string to an XML document
+				Document doc = Jsoup.parse(payData, "", Parser.xmlParser());
+
+				//Read the value from the element <itemID>
+				String paymentID = doc.select("paymentID").text();
+				String output = PayObj.deletePayment(paymentID);
 				return output;
 			}
 
