@@ -85,7 +85,8 @@ public class Order {
 		
 		try
 		{ 
-			Connection con = connect();
+			DB_Connection obj_DB_Connection= new DB_Connection();
+			Connection con = obj_DB_Connection.connect();
 			
 			if (con == null) 
 			{return "Error while connecting to the database for inserting."; }

@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 //For JSON
 import com.google.gson.*;
 
-
+import model.Order;
 
 //For XML
 import org.jsoup.*; 
@@ -15,6 +15,8 @@ import org.jsoup.nodes.Document;
 
 @Path("/Orders")
 public class OrderService {
+	
+	Order orderObj = new Order(); 
 	
 	@GET
 	@Path("/") 
