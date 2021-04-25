@@ -1,17 +1,17 @@
 package com;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//For REST Service
+import javax.ws.rs.*; 
+import javax.ws.rs.core.MediaType; 
+//For JSON
+import com.google.gson.*;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import model.User;
+
+//For XML
+import org.jsoup.*; 
+import org.jsoup.parser.*; 
+import org.jsoup.nodes.Document;
 
 @Path("/Users")
 public class UserService {
@@ -75,7 +75,19 @@ User userObj = new User();
 			 return output; 
 	}
 	
-	
-	
+	@DELETE
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_XML) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String deleteItem(String userData) 
+	{ 
+	//Convert the input string to an XML document
+	 Document doc = Jsoup.parse(userData, "", Parser.xmlParser()); 
+	 
+	//Read the value from the element <itemID>
+	 String userID = doc.select("userID").text(); 
+	 String output = userObj.deleteUser(userID); 
+	return output; 
+	}
 
 }
