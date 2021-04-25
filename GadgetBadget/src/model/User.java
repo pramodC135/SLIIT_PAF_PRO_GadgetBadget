@@ -145,7 +145,7 @@ public class User {
 		return output;
 	}
 	
-	
+	//update user method
 	public String updateUser(String id, String code, String username, String pwd, String email, String role, String fname, String lname, String address, String bod)
 	{
 		String output = "";
