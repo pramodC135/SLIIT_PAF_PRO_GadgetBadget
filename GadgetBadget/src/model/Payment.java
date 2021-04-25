@@ -22,7 +22,7 @@ public class Payment {
 					return "Error while connecting to the database for reading.";
 				}
 				// Prepare the html table to be displayed
-				output = "<table border=\"1\"><tr> <th>AppoCode</th> <th>CardType</th> <th>Name</th> <th>CardNo</th> <th>Phone</th ><th>Exp_date</th> <th>Amount</th> </tr>";
+				output = "<table border=\"1\"><tr> <th>App Code</th> <th>CardType</th> <th>Name</th> <th>CardNo</th> <th>Phone</th ><th>Exp_date</th> <th>Amount</th> </tr>";
 				String query = "select * from payment";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
@@ -95,8 +95,7 @@ public class Payment {
 		
 		
 		//Update the status of payments
-		public String updatePayment(String paymentID, String app_Code, String ctype, String name, String cardno, String pho,
-				String expdate, String amount, String status) {
+		public String updatePayment(String paymentID, String app_Code, String ctype, String name, String cardno, String pho, String expdate, String amount) {
 			String output = "";
 			try {
 				DB_Connection obj_DB_Connection= new DB_Connection();
@@ -105,7 +104,7 @@ public class Payment {
 					return "Error while connecting to the database for updating.";
 				}
 				// create a prepared statement
-				String query = "UPDATE paymentdetails SET app_Code=?,cardType=?,nameOnCard=?,cardno=?,phone=?,expdate=?,amount=?,status=? WHERE paymentID=?";
+				String query = "UPDATE payment SET app_Code=?,cardType=?,nameOnCard=?,cardno=?,phone=?,expdate=?,amount=? WHERE paymentID=?";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
 				preparedStmt.setString(1, app_Code);
@@ -115,8 +114,7 @@ public class Payment {
 				preparedStmt.setString(5, pho);
 				preparedStmt.setString(6, expdate);
 				preparedStmt.setDouble(7, Double.parseDouble(amount));
-				preparedStmt.setString(8, status);
-				preparedStmt.setInt(9, Integer.parseInt(paymentID));
+				preparedStmt.setInt(8, Integer.parseInt(paymentID));
 
 				// execute the statement
 				preparedStmt.execute();
