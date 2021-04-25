@@ -193,7 +193,7 @@ public class User {
 		return output;
 	}
 	
-	
+	//delete user method
 	public String deleteUser(String userID)
 	{
 		String output = "";
