@@ -62,7 +62,7 @@ public class User {
 		return output;
 	}
 	
-	
+	//read user method
 	public String readUsers()
 	{
 		String output = "";
