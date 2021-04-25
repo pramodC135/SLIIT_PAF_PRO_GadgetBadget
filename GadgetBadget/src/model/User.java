@@ -12,6 +12,7 @@ import util.DB_Connection;
 
 public class User {
 	
+	//insert user method
 	public String insertUser(String code, String username, String pwd, String email, String role, String fname, String lname, String address, String bod)
 	{
 		String output = "";
