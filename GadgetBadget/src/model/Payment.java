@@ -10,7 +10,7 @@ import util.DB_Connection;
 public class Payment {
 	
 	//Insert new payment details
-		public String insertPayment(String app_Id, String ctype, String name, String cardno, String pho, String expdate,
+		public String insertPayment(String app_code, String ctype, String name, String cardno, String pho, String expdate,
 				String amount, String status) {
 			String output = "";
 			try {
@@ -21,12 +21,12 @@ public class Payment {
 					return "Error while connecting to the database for inserting.";
 				}
 				// create a prepared statement
-				String query = " insert into payment (`paymentID`,`app_Id`,`cardType`,`nameOnCard`,`cardno`,`phone`,`expdate`,`amount`)"
+				String query = " insert into payment (`paymentID`,`app_Code`,`cardType`,`nameOnCard`,`cardno`,`phone`,`expdate`,`amount`)"
 						+ " values (?,?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
 				preparedStmt.setInt(1, 0);
-				preparedStmt.setString(2, app_Id);
+				preparedStmt.setString(2, app_code);
 				preparedStmt.setString(3, ctype);
 				preparedStmt.setString(4, name);
 				preparedStmt.setInt(5, Integer.parseInt(cardno));
