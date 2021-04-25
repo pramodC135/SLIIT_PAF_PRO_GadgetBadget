@@ -116,5 +116,73 @@ public class Project {
 		
 			return output; 
 		}
+	
+	public String updateProject(String ID, String code, String name, String price, String desc, String by, String ctg) {
+		 String output = ""; 
+		 try {
+		  
+			 	DB_Connection obj_DB_Connection= new DB_Connection();
+				Connection con = obj_DB_Connection.connect();
+				
+			 if (con == null) {
+				 return "Error while connecting to the database for updating."; 
+			 } 
+		 // create a prepared statement
+				 String query = "UPDATE projects SET projectCode=?,projectName=?,projectPrice=?,projectDesc=?,projectBy=?,projectCtg=? WHERE projectID=?"; 
+				 
+				 PreparedStatement preparedStmt = con.prepareStatement(query); 
+				 
+				 // binding values
+				 preparedStmt.setString(1, code); 
+				 preparedStmt.setString(2, name); 
+				 preparedStmt.setDouble(3, Double.parseDouble(price)); 
+				 preparedStmt.setString(4, desc);
+				 preparedStmt.setString(5, by);
+				 preparedStmt.setString(6, ctg);
+				 preparedStmt.setInt(7, Integer.parseInt(ID)); 
+				 
+				 // execute the statement
+				 preparedStmt.execute();
+				 con.close(); 
+				 
+				 output = "Updated successfully"; 
+		 } 
+		 catch (Exception e) {
+		  
+			 output = "Error while updating the item."; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		 return output;
+	}
+	
+	
+	public String deleteProject(String projectID) { 
+		 String output = ""; 
+		 try {
+		  
+			 	DB_Connection obj_DB_Connection= new DB_Connection();
+				Connection con = obj_DB_Connection.connect();
+			 if (con == null) {
+				 return "Error while connecting to the database for deleting."; 
+				 } 
+				 // create a prepared statement
+				 String query = "delete from projects where projectID=?"; 
+				 PreparedStatement preparedStmt = con.prepareStatement(query); 
+				 
+				 // binding values
+				 preparedStmt.setInt(1, Integer.parseInt(projectID)); 
+				 
+				 // execute the statement
+				 preparedStmt.execute(); 
+				 con.close(); 
+				 output = "Deleted successfully"; 
+		 } 
+		 catch (Exception e) {
+		  
+			 output = "Error while deleting the item."; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		 return output; 
+	 }
 
 }
